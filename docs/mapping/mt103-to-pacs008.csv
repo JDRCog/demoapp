@@ -1,0 +1,18 @@
+id,mt103_tag,mt103_description,pacs008_xpath,rule,cbpr_mandatory
+M01,20,Sender's Reference,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/PmtId/InstrId,copy,Y
+M02,20,Sender's Reference,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/PmtId/EndToEndId,copy,Y
+M03,121,UETR (block 3),/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/PmtId/UETR,copy,Y
+M04,32A,Value Date,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/IntrBkSttlmDt,yyMMdd->ISO date,Y
+M05,32A,Currency,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/IntrBkSttlmAmt/@Ccy,copy,Y
+M06,32A,Amount,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/IntrBkSttlmAmt,comma->dot; ISO 4217 minor units,Y
+M07,50K,Debtor Account,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/DbtrAcct/Id/Othr/Id,strip leading slash,Y
+M08,50K,Debtor Name,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/Dbtr/Nm,max 140 chars,Y
+M09,50K,Debtor Country,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/Dbtr/PstlAdr/Ctry,copy,Y
+M10,52A,Ordering Institution,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/DbtrAgt/FinInstnId/BICFI,copy,Y
+M11,56A,Intermediary Institution,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/IntrmyAgt1/FinInstnId/BICFI,copy if present,N
+M12,57A,Account With Institution,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/CdtrAgt/FinInstnId/BICFI,copy,Y
+M13,59,Beneficiary Account,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/CdtrAcct/Id/Othr/Id,strip leading slash,Y
+M14,59,Beneficiary Name,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/Cdtr/Nm,max 140 chars,Y
+M15,59,Beneficiary Country,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/Cdtr/PstlAdr/Ctry,copy,Y
+M16,70,Remittance Information,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/RmtInf/Ustrd,unwrap lines; max 140 chars,N
+M17,71A,Details of Charges,/Document/FIToFICstmrCdtTrf/CdtTrfTxInf/ChrgBr,OUR->DEBT; SHA->SHAR; BEN->CRED,Y
