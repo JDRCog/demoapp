@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        iso20022: ["false", "true"]
+    name: verify (wire.iso20022.enabled=${{ matrix.iso20022 }})
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+      - name: Build, test and enforce coverage
+        run: mvn -B clean verify -Dwire.iso20022.enabled=${{ matrix.iso20022 }}
