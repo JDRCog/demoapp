@@ -1,0 +1,27 @@
+row,mt103_field,mt103_name,cbpr_xpath,rule,notes
+1,Block 1 LT,Sender BIC,AppHdr/Fr/FIId/FinInstnId/BICFI; Document/FIToFICstmrCdtTrf/CdtTrfTxInf/InstgAgt/FinInstnId/BICFI,Copy BIC (8 or 11),
+2,Block 2 LT,Receiver BIC,AppHdr/To/FIId/FinInstnId/BICFI; Document/FIToFICstmrCdtTrf/CdtTrfTxInf/InstdAgt/FinInstnId/BICFI,Copy BIC (8 or 11),
+3,Block 3 :121:,UETR,Document/FIToFICstmrCdtTrf/CdtTrfTxInf/PmtId/UETR,Copy lower-case UUIDv4,
+4,:20:,Sender's Reference,AppHdr/BizMsgIdr; GrpHdr/MsgId; CdtTrfTxInf/PmtId/InstrId,Copy,
+5,(none),End-to-end id,CdtTrfTxInf/PmtId/EndToEndId,Constant NOTPROVIDED,MT103 has no end-to-end id
+6,:23B:,Bank Operation Code,(none),Not mapped,CRED is implied by pacs.008
+7,:32A: date,Value Date,CdtTrfTxInf/IntrBkSttlmDt,YYMMDD → ISO date YYYY-MM-DD,
+8,:32A: ccy+amt,Settlement Amount,CdtTrfTxInf/IntrBkSttlmAmt (@Ccy),Comma → dot; scale = ISO 4217 minor units,
+9,:33B:,Instructed Amount,CdtTrfTxInf/InstdAmt (@Ccy),Same as row 8 (no FX in scope),
+10,:50K: line 1,Ordering Customer account,CdtTrfTxInf/DbtrAcct/Id/IBAN or Othr/Id,IBAN if IBAN-shaped else Othr/Id,
+11,:50K: line 2,Ordering Customer name,CdtTrfTxInf/Dbtr/Nm,Copy,
+12,:50K: lines 3-4,Ordering Customer address,CdtTrfTxInf/Dbtr/PstlAdr/AdrLine,One AdrLine per line (max 2),Hybrid address
+13,:50K: last line,Ordering Customer town/country,CdtTrfTxInf/Dbtr/PstlAdr/TwnNm + Ctry,Split CC/TOWN,TwnNm and Ctry mandatory in CBPR+ hybrid address
+14,:52A:,Ordering Institution,CdtTrfTxInf/DbtrAgt/FinInstnId/BICFI,Copy,
+15,:56A:,Intermediary,CdtTrfTxInf/IntrmyAgt1/FinInstnId/BICFI,Copy when present,Omit element when absent
+16,:57A:,Account With Institution,CdtTrfTxInf/CdtrAgt/FinInstnId/BICFI,Copy,
+17,:59: line 1,Beneficiary account,CdtTrfTxInf/CdtrAcct/Id/IBAN or Othr/Id,As row 10,
+18,:59: line 2,Beneficiary name,CdtTrfTxInf/Cdtr/Nm,Copy,
+19,:59: lines 3-4,Beneficiary address,CdtTrfTxInf/Cdtr/PstlAdr/AdrLine,As row 12,
+20,:59: last line,Beneficiary town/country,CdtTrfTxInf/Cdtr/PstlAdr/TwnNm + Ctry,As row 13,
+21,:70:,Remittance Information,CdtTrfTxInf/RmtInf/Ustrd,Join lines without separators (max 140),Omit when absent
+22,:71A: OUR,Charges,CdtTrfTxInf/ChrgBr,OUR → DEBT,
+23,:71A: SHA,Charges,CdtTrfTxInf/ChrgBr,SHA → SHAR,
+24,(none),Settlement method,GrpHdr/SttlmInf/SttlmMtd,Constant INDA,RBC settles via correspondent accounts
+25,(none),Message definition,AppHdr/MsgDefIdr; AppHdr/BizSvc,pacs.008.001.08; swift.cbprplus.02,
+26,(none),Creation timestamp,AppHdr/CreDt; GrpHdr/CreDtTm,Clock now() UTC to the second,Same instant in both
