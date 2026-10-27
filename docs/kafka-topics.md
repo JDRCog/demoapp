@@ -4,5 +4,7 @@
 |---|---|---|---|
 | `payments.crossborder.mt103.outbound.v1` | SWIFT FIN MT103 text | UETR | Live |
 | `payments.crossborder.pacs008.outbound.v1` | CBPR+ `head.001.001.02` + `pacs.008.001.08` XML | UETR | Provisioned, not yet produced to |
+| `payments.domestic.lynx.mt103.outbound.v1` | SWIFT FIN MT103 text | UETR | Live (flag off fallback) |
+| `payments.domestic.lynx.pacs008.outbound.v1` | Lynx `pacs.008.001.08` XML | UETR | Live |
 
 Keep this table in sync with `messaging.KafkaTopics`. New topics require a Platform Messaging request.

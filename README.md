@@ -28,6 +28,8 @@ src/main/java/com/rbc/payments/wires/
   validation/   WireTransferValidator
   logging/      PiiMasker
   crossborder/  CrossBorderWireService
+  iso20022/     IsoXml (StAX writer), Pacs008Elements (shared pacs.008 blocks)
+  domestic/     LynxPaymentService, LynxPacs008Builder
 ```
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for engineering rules (PII, dependencies, Kafka topics).
