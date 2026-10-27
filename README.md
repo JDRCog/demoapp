@@ -6,7 +6,7 @@ Validates outbound customer wires, renders them in the correct interbank format 
 
 | Flow | Format today | Flag | Topic |
 |---|---|---|---|
-| Cross-border (`crossborder/`) | SWIFT MT103 | — | `payments.crossborder.mt103.outbound.v1` |
+| Cross-border (`crossborder/`) | SWIFT MT103 (pacs.008 CBPR+ behind flag) | `wire.iso20022.enabled` (default off) | `payments.crossborder.mt103.outbound.v1` |
 | Domestic Lynx (`domestic/`) | ISO 20022 pacs.008 | `wire.lynx.iso20022.enabled` | `payments.domestic.lynx.*` |
 
 ## Build
